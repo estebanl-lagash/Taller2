@@ -1,6 +1,6 @@
 var config = require('./settings/appsettings.secrets.json');
 
-const api =require("./helpers/api");
+const api = require("./helpers/api");
 const express = require('express');
 const cors = require('cors');
 const fetch = require("node-fetch");
@@ -55,10 +55,10 @@ app.get('/api/example2', async function(req, res) {
       mode: "cors",
       headers: { 'Content-Type': 'application/json' },
     }).catch((error) => {
-      console.log(`error: ${error}`);
-      trace.trackException(`Error llamando a ${api.uriConfig.api.getUF("fecha en formato dd-mm-yyyy")}. Error: ${error}`);
-      res.status(500).send({msg:"Ha ocurrido un error llamando al API para obtener la información solicitada.",ok:false});
-      res.end();
+        console.log(`error: ${error}`);
+        trace.trackException(`Error llamando a ${api.uriConfig.api.getUF("fecha en formato dd-mm-yyyy")}. Error: ${error}`);
+        res.status(500).send({msg:"Ha ocurrido un error llamando al API para obtener la información solicitada.",ok:false});
+        res.end();
     });
   
     const response = await request.json();
@@ -70,11 +70,8 @@ app.get('/api/example2', async function(req, res) {
       trace.trackException(`Error llamando a ${api.uriConfig.apiQR.tokens}. Error: ${error}`);
       res.status(500).send({msg:"Ha ocurrido un error llamando al API para obtener la información solicitada.",ok:false});
       res.end();
-    }
-      
+    }      
 });
-
-
 
 app.listen(PORT, HOST);
 console.log(`Corriendo  API en http://${HOST}:${PORT}`);

@@ -1,13 +1,15 @@
+const fetch = require("node-fetch");
+var config = require("./../settings/appsettings.secrets.json");
+const { apiUri } = config;
 
-var config = require('./../settings/appsettings.secrets.json');
-const { apiUri } = config
-
-const api = {
-  getUF: (date)=>`${apiUri}/uf/${date}`,
+const getUf = async () => {
+  const result = fetch(apiUri)
+    .then(res => res.json())
+    .then(data => {
+      return `El valor de ${data.uf.nombre}
+    es de $ ${data.uf.valor}`;
+    });
+  return await result;
 };
 
-const uriConfig = {
-  api,
-};
-
-exports.uriConfig = uriConfig;
+module.exports = { getUf };
